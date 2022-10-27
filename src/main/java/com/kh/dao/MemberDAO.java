@@ -19,6 +19,7 @@ public class MemberDAO {
 	private PreparedStatement pstmt = null; 
 	
 	public boolean logingCheck(String id, String pwd) {
+		boolean isRegMember = false;
 		try {
 			conn = Common.getConnection();
 			stmt = conn.createStatement(); // Statement 객체 얻기
@@ -31,10 +32,7 @@ public class MemberDAO {
 				System.out.println("ID : " + sqlId);
 				System.out.println("PWD : " + sqlPwd);
 				if(id.equals(sqlId) && pwd.equals(sqlPwd)) {
-					Common.close(rs);
-					Common.close(stmt);
-					Common.close(conn);
-					return true;
+					isRegMember = true;
 				}
 			}
 			Common.close(rs);
@@ -43,7 +41,7 @@ public class MemberDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return isRegMember;
 	}
 	
 	public List<MemberVO> memberSelect() {
@@ -137,14 +135,4 @@ public class MemberDAO {
 		if(result == 1) return true;
 		else return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
