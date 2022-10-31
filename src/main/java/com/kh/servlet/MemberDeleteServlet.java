@@ -24,7 +24,6 @@ public class MemberDeleteServlet extends HttpServlet {
 		Common.corsResSet(response);
 	}
 
-
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -40,10 +39,6 @@ public class MemberDeleteServlet extends HttpServlet {
 		if(isDelComplete) resJson.put("result", "OK");
 		else resJson.put("result", "NOK");
 		out.print(resJson);
-		
-		
-
 	}
-
 
 }

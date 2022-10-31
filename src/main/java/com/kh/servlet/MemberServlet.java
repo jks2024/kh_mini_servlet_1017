@@ -21,7 +21,6 @@ import com.kh.vo.MemberVO;
 @WebServlet("/MemberServlet")
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -42,6 +41,10 @@ public class MemberServlet extends HttpServlet {
 		JSONObject jsonObj = Common.getJsonObj(sb);
 		
 		String reqCmd = (String)jsonObj.get("cmd");
+		String reqId = (String)jsonObj.get("id");
+		System.out.println("전달 받은 ID : " + reqId);
+		
+		
 		PrintWriter out = response.getWriter();
 		if(!reqCmd.equals("MemberInfo")) {
 			JSONObject resJson = new JSONObject();
@@ -51,7 +54,7 @@ public class MemberServlet extends HttpServlet {
 		} 
 		
 		MemberDAO dao = new MemberDAO();
-		List<MemberVO> list = dao.memberSelect();
+		List<MemberVO> list = dao.memberSelect(reqId);
 		
 		JSONArray memberArray = new JSONArray();
 		for (MemberVO e : list) {
